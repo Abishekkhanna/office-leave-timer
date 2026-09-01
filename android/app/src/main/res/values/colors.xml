@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#1E293B</color>
+    <color name="primary_dark">#0F172A</color>
+    <color name="accent">#2563EB</color>
+    <color name="accent_pressed">#1D4ED8</color>
+    <color name="reset_bg">#334155</color>
+    <color name="reset_pressed">#1E293B</color>
+    <color name="text_white">#F8FAFC</color>
+    <color name="text_subtle">#94A3B8</color>
+    <color name="widget_bg_dark">#18181B</color>
+    <color name="widget_border">#27272A</color>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Office Leave Timer</string>
+    <string name="widget_name">Office Leave Widget</string>
+    <string name="widget_title">OFFICE LEAVE</string>
+    <string name="widget_tap_start">Tap START</string>
+    <string name="widget_leave_at">Leave at</string>
+    <string name="widget_btn_start">START</string>
+    <string name="widget_btn_reset">RESET</string>
+</resources>

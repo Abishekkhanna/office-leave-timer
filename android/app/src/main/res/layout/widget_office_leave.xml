@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <!-- Header: OFFICE LEAVE -->
+    <TextView
+        android:id="@+id/widget_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_title"
+        android:textColor="#94A3B8"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.08"
+        android:gravity="center" />
+
+    <!-- Center status & leave time container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <!-- Status text: "Tap START" or "Leave at" -->
+        <TextView
+            android:id="@+id/widget_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_tap_start"
+            android:textColor="#E2E8F0"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:gravity="center" />
+
+        <!-- Calculated leaving time (e.g. "6:42 PM") -->
+        <TextView
+            android:id="@+id/widget_time_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+    <!-- Bottom Action Buttons: [ START ] [ RESET ] -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/btn_start_bg"
+            android:text="@string/widget_btn_start"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null" />
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/btn_reset_bg"
+            android:text="@string/widget_btn_reset"
+            android:textColor="#E2E8F0"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+
+</LinearLayout>

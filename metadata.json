@@ -1,0 +1,6 @@
+{
+  "name": "Office Leave Timer",
+  "description": "Home-screen widget for iOS and Android that calculates your 9-hour leave time with one tap directly from your mobile home screen.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
