@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0D14"
+    android:padding="20dp"
+    android:keepScreenOn="true">
+
+    <!-- Center Terminal Window Card -->
+    <LinearLayout
+        android:id="@+id/terminal_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:background="#121622"
+        android:padding="0dp">
+
+        <!-- Terminal Top Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#1B2232"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#EF4444"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#F59E0B"
+                android:layout_marginEnd="6dp" />
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="#10B981"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/txt_terminal_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="terminalsoul@dev-workstation:~$ ./event"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/txt_popup_category_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="☀️ MORNING"
+                android:textColor="#38BDF8"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:background="#0F172A"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+
+        </LinearLayout>
+
+        <!-- Inner Terminal Output Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="22dp">
+
+            <TextView
+                android:id="@+id/txt_scheduled_event_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[SCHEDULED EVENT: 09:00 AM]"
+                android:textColor="#6366F1"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="14dp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="320dp">
+
+                <TextView
+                    android:id="@+id/txt_popup_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="☀️ MORNING DEPLOYMENT\n\nGood morning, Abishek. 🧑💻\n\nYour developer instance has started.\n\nWARNING:\nCoffee dependency not initialized. ☕😂"
+                    android:textColor="#F1F5F9"
+                    android:textSize="17sp"
+                    android:lineSpacingMultiplier="1.35"
+                    android:typeface="monospace" />
+
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/txt_message_meta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TerminalSoul • Daily Unique Seed"
+                android:textColor="#64748B"
+                android:textSize="11sp"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom Prominent Close Button -->
+    <Button
+        android:id="@+id/btn_close_popup"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+        android:background="#2563EB"
+        android:text="[ CLOSE ]"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        android:letterSpacing="0.08"
+        android:stateListAnimator="@null"
+        android:layout_marginBottom="16dp" />
+
+</RelativeLayout>

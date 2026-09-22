@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/alert_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#070709"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="48dp"
+    android:paddingBottom="36dp"
+    android:keepScreenOn="true">
+
+    <!-- Terminal Window Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#121216"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <!-- Terminal dot indicators -->
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="#EF4444"
+            android:layout_marginEnd="6dp" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="#F59E0B"
+            android:layout_marginEnd="6dp" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="#10B981"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="abishek@office:~/shift-v1"
+            android:textColor="#64748B"
+            android:textSize="11sp"
+            android:fontFamily="monospace" />
+
+        <TextView
+            android:id="@+id/alert_exit_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXIT_CODE: 0"
+            android:textColor="#10B981"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace" />
+    </LinearLayout>
+
+    <!-- Scrollable main content container -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="28dp"
+            android:paddingBottom="28dp">
+
+            <!-- HTTP status banner -->
+            <TextView
+                android:id="@+id/alert_status_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚨 HTTP 200"
+                android:textColor="#F59E0B"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:gravity="center" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/alert_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WORKDAY COMPLETED"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="80dp"
+                android:layout_height="2dp"
+                android:background="#2563EB"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Large Developer Joke / Leave Message -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#121217"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <TextView
+                    android:id="@+id/alert_message_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F1F5F9"
+                    android:textSize="19sp"
+                    android:lineSpacingMultiplier="1.35"
+                    android:gravity="center"
+                    android:text="Hey Abishek 👋 Your 9-hour employee session has successfully terminated. EXIT_CODE: 0 🏃‍♂️💨 GO HOME BEFORE ANOTHER JIRA TICKET SPAWNS." />
+            </LinearLayout>
+
+            <!-- Technical diagnostic pills -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/alert_uptime_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⏱️ UPTIME: 9h 00m"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace"
+                    android:background="#16161D"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/alert_date_seed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SEED: 2026-09-21"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:fontFamily="monospace"
+                    android:background="#16161D"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom CLOSE Button -->
+    <Button
+        android:id="@+id/btn_alert_close"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="CLOSE"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.08"
+        android:background="#2563EB"
+        android:stateListAnimator="@null"
+        android:contentDescription="Close full-screen leave alert" />
+
+</LinearLayout>

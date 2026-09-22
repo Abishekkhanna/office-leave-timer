@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0D14"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
+
+        <!-- App Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_terminal_soul"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TerminalSoul"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scheduled Developer Soul Popups"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_active_count_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 ACTIVE"
+                android:textColor="#34D399"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:background="#064E3B"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
+
+        </LinearLayout>
+
+        <!-- Full-Screen Permissions Card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SYSTEM POPUP PERMISSIONS (SCREEN ON &amp; OFF)"
+            android:textColor="#F59E0B"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#121622"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/txt_permission_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Checking full-screen permissions..."
+                android:textColor="#E2E8F0"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.2" />
+
+            <Button
+                android:id="@+id/btn_grant_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#D97706"
+                android:text="Enable 'Display Over Other Apps' (Screen-ON Popup)"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_grant_fullscreen_intent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#2563EB"
+                android:text="Enable Full-Screen Intent in Settings"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Daily Popups Section Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DAILY POPUPS"
+                android:textColor="#E2E8F0"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:id="@+id/txt_timezone_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Local Device Time"
+                android:textColor="#64748B"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <!-- Configured Schedules List Container -->
+        <LinearLayout
+            android:id="@+id/container_schedules"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Empty state placeholder -->
+        <TextView
+            android:id="@+id/txt_empty_schedules"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#151A24"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="No scheduled popups yet.\nTap '+ ADD TIME' below to configure your daily pings."
+            android:textColor="#94A3B8"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:layout_marginBottom="12dp" />
+
+        <!-- + Add Time Button -->
+        <Button
+            android:id="@+id/btn_add_time"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#10B981"
+            android:text="+ ADD TIME"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:letterSpacing="0.08"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Quick Presets -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QUICK PRESET SLOTS"
+            android:textColor="#94A3B8"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn_preset_900"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="#1E2430"
+                android:text="09:00 ☀️"
+                android:textColor="#38BDF8"
+                android:textSize="11sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_preset_1300"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="#1E2430"
+                android:text="01:00 🍱"
+                android:textColor="#FBBF24"
+                android:textSize="11sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_preset_1800"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="4dp"
+                android:background="#1E2430"
+                android:text="06:00 🔥"
+                android:textColor="#F87171"
+                android:textSize="11sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_preset_2130"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:background="#1E2430"
+                android:text="09:30 🌙"
+                android:textColor="#C084FC"
+                android:textSize="11sp"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Testing & Preview Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAST TESTING (VERIFY SCREEN ON &amp; SCREEN OFF)"
+            android:textColor="#94A3B8"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn_test_5s"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="#312E81"
+                android:text="⚡ Test in 5s (Lock/Home)"
+                android:textColor="#C7D2FE"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_preview_popup"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="#1E293B"
+                android:text="👁️ Instant Preview"
+                android:textColor="#38BDF8"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Architecture & Personality Info Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#11151F"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🤖 TerminalSoul Intelligence"
+                android:textColor="#A78BFA"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/txt_info_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• 505 unique developer messages across 4 daily shifts\n• Deterministic selection (Date + Time + Shift)\n• 100% distinct from Office Leave Timer V1\n• Real Android AlarmClock engine with boot recovery"
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

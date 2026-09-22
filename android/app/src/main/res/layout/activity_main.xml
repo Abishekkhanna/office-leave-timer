@@ -2,22 +2,22 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F172A"
+    android:background="#070709"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="20dp"
         android:gravity="center_horizontal">
 
         <!-- App Icon & Title -->
         <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:src="@drawable/ic_office_clock"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/app_name" />
 
         <TextView
@@ -27,26 +27,330 @@
             android:textColor="#F8FAFC"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home-Screen AppWidget Companion"
+            android:text="Android 15 Home Widget + Full-Screen Leave Alert"
             android:textColor="#94A3B8"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+
+        <!-- Full-Screen Popup Permissions Status Card -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FULL-SCREEN POPUP PERMISSIONS (SCREEN ON &amp; OFF)"
+            android:textColor="#F59E0B"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#121217"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txt_overlay_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Checking full-screen popup permissions..."
+                android:textColor="#E2E8F0"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.2" />
+
+            <Button
+                android:id="@+id/btn_grant_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#D97706"
+                android:text="Enable 'Display Over Other Apps' (Screen-On Popup)"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_grant_fullscreen_intent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#2563EB"
+                android:text="Enable Full-Screen Intent in Settings"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btn_test_5s_alert"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#1E293B"
+                android:text="⚡ Test Full-Screen Alert in 5 Seconds (Lock phone or Home screen)"
+                android:textColor="#38BDF8"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Office Hours Configuration Card (HH:MM) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TOTAL OFFICE HOURS (HH:MM)"
+            android:textColor="#38BDF8"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#121217"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Configure workday duration in HH:MM format for standard shifts, half-days, or special events."
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.2" />
+
+            <!-- Display current hours -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/main_hours_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:00"
+                    android:textColor="#38BDF8"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    android:id="@+id/main_hours_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:text="(9 hrs 00 mins)"
+                    android:textColor="#E2E8F0"
+                    android:textSize="13sp" />
+
+                <Button
+                    android:id="@+id/btn_pick_time_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:background="#1E293B"
+                    android:text="🕒 Pick HH:MM"
+                    android:textColor="#38BDF8"
+                    android:textSize="11sp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:stateListAnimator="@null" />
+
+            </LinearLayout>
+
+            <!-- Manual HH:MM Input Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/edit_shift_hours"
+                    android:layout_width="60dp"
+                    android:layout_height="42dp"
+                    android:background="#1E1E28"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:hint="09"
+                    android:textColorHint="#64748B" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="#94A3B8"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp" />
+
+                <EditText
+                    android:id="@+id/edit_shift_minutes"
+                    android:layout_width="60dp"
+                    android:layout_height="42dp"
+                    android:background="#1E1E28"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:hint="00"
+                    android:textColorHint="#64748B" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="hh : mm"
+                    android:textColor="#64748B"
+                    android:textSize="11sp"
+                    android:layout_marginStart="8dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_save_shift_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="#2563EB"
+                    android:text="Save Duration"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:stateListAnimator="@null" />
+
+            </LinearLayout>
+
+            <!-- Quick Event Presets -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QUICK EVENT PRESETS"
+                android:textColor="#64748B"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="6dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_chip_900"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:background="#1E1E28"
+                    android:text="09:00"
+                    android:textColor="#E2E8F0"
+                    android:textSize="10sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_chip_830"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:background="#1E1E28"
+                    android:text="08:30"
+                    android:textColor="#E2E8F0"
+                    android:textSize="10sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_chip_800"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:background="#1E1E28"
+                    android:text="08:00"
+                    android:textColor="#E2E8F0"
+                    android:textSize="10sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_chip_600"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:background="#1E1E28"
+                    android:text="06:00"
+                    android:textColor="#E2E8F0"
+                    android:textSize="10sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_chip_430"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:background="#1E1E28"
+                    android:text="04:30"
+                    android:textColor="#E2E8F0"
+                    android:textSize="10sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_chip_001"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:background="#312E81"
+                    android:text="00:01 (1m)"
+                    android:textColor="#C7D2FE"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <!-- Live Widget Preview Card -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="WIDGET PREVIEW"
+            android:text="HOME SCREEN WIDGET PREVIEW"
             android:textColor="#64748B"
             android:textSize="11sp"
             android:textStyle="bold"
             android:letterSpacing="0.1"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
@@ -62,7 +366,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/widget_title"
                 android:textColor="#94A3B8"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.08" />
 
@@ -71,8 +375,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
 
                 <TextView
                     android:id="@+id/main_status_text"
@@ -80,17 +384,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/widget_tap_start"
                     android:textColor="#E2E8F0"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/main_time_display"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
-                    android:textSize="32sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
                     android:visibility="gone"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
@@ -102,47 +406,172 @@
                 <Button
                     android:id="@+id/main_btn_start"
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     android:background="@drawable/btn_start_bg"
                     android:text="@string/widget_btn_start"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null" />
 
                 <Button
                     android:id="@+id/main_btn_reset"
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:background="@drawable/btn_reset_bg"
                     android:text="@string/widget_btn_reset"
                     android:textColor="#E2E8F0"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null" />
 
             </LinearLayout>
 
+        </LinearLayout>
+
+        <!-- Full-Screen Leave Alert Controls -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FULL-SCREEN LEAVE ALERT (V1)"
+            android:textColor="#64748B"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#121217"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/main_today_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E2E8F0"
+                android:textSize="13sp"
+                android:lineSpacingMultiplier="1.3"
+                android:text="Loading today's developer joke..." />
+
+            <Button
+                android:id="@+id/main_btn_preview_alert"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="#2563EB"
+                android:text="🚨 Preview Full-Screen Alert Screen"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginTop="14dp"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- Verification / Test Presets -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TEST WORKDAY CALCULATION PRESETS"
+            android:textColor="#64748B"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#121217"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <Button
+                    android:id="@+id/btn_preset_900"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:background="#1E1E28"
+                    android:text="9:00 AM → 6:00 PM"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_preset_932"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:background="#1E1E28"
+                    android:text="9:32 AM → 6:32 PM"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp"
+                    android:stateListAnimator="@null" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_preset_942"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:background="#1E1E28"
+                    android:text="9:42 AM → 6:42 PM"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp"
+                    android:stateListAnimator="@null" />
+
+                <Button
+                    android:id="@+id/btn_preset_1005"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:background="#1E1E28"
+                    android:text="10:05 AM → 7:05 PM"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp"
+                    android:stateListAnimator="@null" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- Instructions for Realme / Android -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HOW TO ADD TO HOME SCREEN"
+            android:text="HOW TO ADD WIDGET ON REALME 11 5G"
             android:textColor="#64748B"
             android:textSize="11sp"
             android:textStyle="bold"
             android:letterSpacing="0.1"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1E293B"
+            android:background="#121217"
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_marginBottom="24dp">
@@ -150,8 +579,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1. Go to your Home Screen.\n2. Long-press any empty space (or pinch in).\n3. Tap 'Widgets' at the bottom.\n4. Scroll to 'Office Leave Timer'.\n5. Drag and place 'Office Leave Widget' onto your home screen.\n6. Tap START whenever you arrive at office!"
-                android:textColor="#CBD5E1"
+                android:text="1. Go to your Home Screen.\n2. Long-press any empty space (or pinch with two fingers).\n3. Tap 'Widgets' at the bottom.\n4. Scroll to 'Office Leave Timer V1'.\n5. Drag and drop the widget onto your home screen.\n6. Tap START on the widget upon arrival at office!\n7. At the 9-hour mark, your full-screen alert will appear automatically!"
+                android:textColor="#94A3B8"
                 android:textSize="13sp"
                 android:lineSpacingMultiplier="1.3" />
 

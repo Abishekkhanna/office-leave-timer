@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.officeleave.timerv1"
-    android:versionCode="3"
-    android:versionName="1.0.0-V1">
+    package="com.terminalsoul.app"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
     <uses-sdk
         android:minSdkVersion="26"
         android:targetSdkVersion="35" />
 
-    <!-- Exact Alarm & Wakeup permissions for Android 14/15 -->
+    <!-- Exact Alarm, Full-Screen, and Wakeup permissions for Android 14/15 -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -22,13 +22,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_office_clock"
+        android:icon="@drawable/ic_terminal_soul"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_office_clock"
+        android:roundIcon="@drawable/ic_terminal_soul"
         android:supportsRtl="true"
-        android:theme="@style/Theme.OfficeLeave">
+        android:theme="@style/Theme.TerminalSoul">
 
-        <!-- Launcher Activity (Companion screen & test controls) -->
+        <!-- Launcher Activity: Schedule Manager & Companion UI -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -39,9 +39,9 @@
             </intent-filter>
         </activity>
 
-        <!-- Full-Screen Developer Leave Alert Activity -->
+        <!-- Full-Screen Developer Terminal Soul Popup Activity -->
         <activity
-            android:name=".LeaveAlertActivity"
+            android:name=".PopupActivity"
             android:exported="true"
             android:showWhenLocked="true"
             android:turnScreenOn="true"
@@ -49,39 +49,24 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <!-- Home Screen AppWidget Receiver -->
+        <!-- Scheduled Popup Broadcast Receiver -->
         <receiver
-            android:name=".OfficeLeaveWidgetProvider"
-            android:exported="true"
-            android:label="@string/widget_name">
+            android:name=".PopupReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.officeleave.timerv1.ACTION_START" />
-                <action android:name="com.officeleave.timerv1.ACTION_RESET" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/office_leave_widget_info" />
-        </receiver>
-
-        <!-- Exact Alarm BroadcastReceiver -->
-        <receiver
-            android:name=".LeaveAlertReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.officeleave.timerv1.ACTION_TRIGGER_LEAVE_ALERT" />
+                <action android:name="com.terminalsoul.app.ACTION_TRIGGER_POPUP" />
             </intent-filter>
         </receiver>
 
-        <!-- Boot Completed Receiver (Restores scheduled leave alert after reboot) -->
+        <!-- Device Boot & Clock Change Receiver (Reschedules Alarms) -->
         <receiver
             android:name=".BootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </receiver>
 

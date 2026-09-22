@@ -1,4 +1,4 @@
-package com.officeleave.widget;
+package com.officeleave.timerv1;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -17,17 +17,74 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Native Android AppWidgetProvider for Office Leave Timer.
- * Handles START and RESET actions directly from the home screen without opening the app.
+ * Native Android AppWidgetProvider for Office Leave Timer V1.
+ * Supports 1-tap START and RESET directly from the mobile home screen,
+ * calculates the exact 9-hour leave time, and schedules the full-screen alert.
  */
 public class OfficeLeaveWidgetProvider extends AppWidgetProvider {
 
-    public static final String ACTION_START = "com.officeleave.widget.ACTION_START";
-    public static final String ACTION_RESET = "com.officeleave.widget.ACTION_RESET";
-    public static final String PREFS_NAME = "office_leave_prefs";
+    public static final String ACTION_START = "com.officeleave.timerv1.ACTION_START";
+    public static final String ACTION_RESET = "com.officeleave.timerv1.ACTION_RESET";
+    public static final String PREFS_NAME = "office_leave_v1_prefs";
     public static final String PREF_KEY_START_TIME = "start_time_millis";
     public static final String PREF_KEY_LEAVE_TIME = "leave_time_millis";
     public static final String PREF_KEY_IS_ACTIVE = "is_active";
+    public static final String PREF_KEY_LAST_ALERTED_TIME = "last_alerted_time_millis";
+
+    // Dynamic shift duration keys (Default: 09:00 = 9 hours 00 minutes)
+    public static final String PREF_KEY_DURATION_HOURS = "shift_duration_hours";
+    public static final String PREF_KEY_DURATION_MINUTES = "shift_duration_minutes";
+    public static final int DEFAULT_DURATION_HOURS = 9;
+    public static final int DEFAULT_DURATION_MINUTES = 0;
+
+    public static int getShiftDurationHours(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(PREF_KEY_DURATION_HOURS, DEFAULT_DURATION_HOURS);
+    }
+
+    public static int getShiftDurationMinutes(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return prefs.getInt(PREF_KEY_DURATION_MINUTES, DEFAULT_DURATION_MINUTES);
+    }
+
+    public static int getTotalShiftDurationMinutes(Context context) {
+        int hours = getShiftDurationHours(context);
+        int mins = getShiftDurationMinutes(context);
+        int total = hours * 60 + mins;
+        return total > 0 ? total : DEFAULT_DURATION_HOURS * 60;
+    }
+
+    public static void setShiftDuration(Context context, int hours, int minutes) {
+        if (hours < 0) hours = 0;
+        if (hours > 23) hours = 23;
+        if (minutes < 0) minutes = 0;
+        if (minutes > 59) minutes = 59;
+        if (hours == 0 && minutes == 0) {
+            hours = DEFAULT_DURATION_HOURS;
+            minutes = DEFAULT_DURATION_MINUTES;
+        }
+
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.edit()
+                .putInt(PREF_KEY_DURATION_HOURS, hours)
+                .putInt(PREF_KEY_DURATION_MINUTES, minutes)
+                .apply();
+
+        // If shift is currently active, recalculate leave time and reschedule alert
+        boolean isActive = prefs.getBoolean(PREF_KEY_IS_ACTIVE, false);
+        long startTimeMillis = prefs.getLong(PREF_KEY_START_TIME, 0);
+        if (isActive && startTimeMillis > 0) {
+            long durationMillis = ((long) hours * 60L + (long) minutes) * 60L * 1000L;
+            long newLeaveTimeMillis = startTimeMillis + durationMillis;
+
+            prefs.edit()
+                    .putLong(PREF_KEY_LEAVE_TIME, newLeaveTimeMillis)
+                    .apply();
+
+            updateAllWidgets(context);
+            AlertScheduler.scheduleLeaveAlert(context, newLeaveTimeMillis);
+        }
+    }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -55,17 +112,20 @@ public class OfficeLeaveWidgetProvider extends AppWidgetProvider {
     /**
      * When START is pressed:
      * 1. Read current device local date/time.
-     * 2. Save that exact start time locally.
-     * 3. Add exactly 9 hours to start time.
-     * 4. Display only the calculated leaving time.
+     * 2. Save exact start timestamp locally.
+     * 3. Add configured office hours (default 09:00 = 9h 00m, or user-set hh:mm).
+     * 4. Save calculated leave timestamp.
+     * 5. Update widget display.
+     * 6. Schedule full-screen alert for the leave time (cancels any previous alarm).
      */
-    private void handleStart(Context context) {
+    public static void handleStart(Context context) {
         Calendar now = Calendar.getInstance();
         long startTimeMillis = now.getTimeInMillis();
 
-        // Add exactly 9 hours
+        // Calculate offset based on configured office duration (in minutes)
+        int totalMinutes = getTotalShiftDurationMinutes(context);
         Calendar leaveTime = (Calendar) now.clone();
-        leaveTime.add(Calendar.HOUR_OF_DAY, 9);
+        leaveTime.add(Calendar.MINUTE, totalMinutes);
         long leaveTimeMillis = leaveTime.getTimeInMillis();
 
         // Save locally to SharedPreferences
@@ -76,19 +136,28 @@ public class OfficeLeaveWidgetProvider extends AppWidgetProvider {
                 .putBoolean(PREF_KEY_IS_ACTIVE, true)
                 .apply();
 
-        // Refresh all widget instances on home screen
+        // Update home-screen widgets
         updateAllWidgets(context);
+
+        // Schedule exact full-screen leave alert (and cancel any existing one)
+        AlertScheduler.scheduleLeaveAlert(context, leaveTimeMillis);
     }
 
     /**
      * When RESET is pressed:
-     * Clear saved state and return widget to "Tap START".
+     * 1. Cancel scheduled alert and dismiss any active notification.
+     * 2. Clear saved start and leave timestamps.
+     * 3. Return widget to "Tap START".
      */
-    private void handleReset(Context context) {
+    public static void handleReset(Context context) {
+        // Cancel scheduled alarm
+        AlertScheduler.cancelLeaveAlert(context);
+
+        // Clear local storage
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         prefs.edit().clear().apply();
 
-        // Refresh all widget instances on home screen
+        // Update home-screen widgets
         updateAllWidgets(context);
     }
 
